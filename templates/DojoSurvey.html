@@ -9,6 +9,13 @@
 </head>
 <body>
     <div class = "survey">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+            {% endif    %}
+        {% endwith %}
         <form action = "/results" method="post">
             Your Name: <input id="name" type="text" name="name"><br><br>
             Dojo Location: <select id="dojolocations" name="dojolocations" value="San_Jose">
