@@ -12,18 +12,22 @@ def DojoSurvey():
 @app.route("/results", methods=["POST"])
 def results():
     print "POST data"
-    if len(request.form["name"]) < 1:
+    if len(request.form["name"]) < 1 and len(request.form["comment"]) < 1:
         flash("Name cannot be Blank!")
+        flash("Please enter a Comment!")
+        return redirect("/")
+    elif len(request.form["name"]) < 1:
+        flash("Name cannot be Blank!")
+        return redirect("/")
+    elif len(request.form["comment"]) < 1:
+        flash("Comment cannot be Blank!")
         return redirect("/")
     else:
         flash("Kudos for entering your name!")
     name = request.form["name"]
     dojolocations = request.form["dojolocations"]
     favoritelanguages = request.form["favoritelanguages"]
-    if len(request.form["comment"]) < 1:
-        flash("Please enter a comment!")
-        return redirect("/")
-    elif len(request.form["comment"]) > 120:
+    if len(request.form["comment"]) > 120:
         flash("Comment cannot not be longer than 120 characters. Please shorten your comment")
         return redirect("/")
     else:
